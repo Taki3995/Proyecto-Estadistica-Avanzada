@@ -52,3 +52,51 @@ Corporate Bankruptcy Prediction
 - Diapositivas con visualizaciones
 - Justificación de cada técnica
 - Interpretación clara para audiencia no técnica
+
+
+# PLAN 2.0 (revisar)
+## Etapa 1 — Preparación y EDA (mejorada)
+
+Objetivo: dejar un dataset reproducible, documentado y listo para modelado.
+
+Acciones concretas ya realizadas / a ejecutar:
+
+Carga y limpieza: quitar espacios en nombres (df.columns.str.strip()), documentar shape.
+
+Reporte de nulos (hecho — no hay).
+
+Identificación y eliminación automática:
+
+Columnas constantes (nunique==1) → eliminar y listar.
+
+Columnas duplicadas / correlación ≈1 → eliminar y listar.
+
+Pares con correlación > 0.95 → eliminar una columna por par (ya implementado). Imprimir lista de columnas eliminadas por correlación y por ser constantes/duplicadas (hazlo en log).
+
+Outliers: winsorización (1%/99%) o RobustScaler; documentar qué se hizo y por qué.
+
+EDA visual:
+
+Countplot y porcentaje para Bankrupt?.
+
+Heatmap de correlación final (variables retenidas).
+
+Boxplots de las 15 variables con mayor desviación estándar (o las 15 prioritarias).
+
+Distribuciones separadas por clase (boxplot / KDE) para variables clave.
+
+Colinealidad cuantitativa:
+
+Calcular VIF para las variables retenidas; reportar variables con VIF>10.
+
+Decidir: eliminar basado en VIF o agrupar con PCA/score financiero.
+
+Agrupación semántica:
+
+Crear grupos (Rentabilidad, Liquidez, Endeudamiento, Eficiencia, Crecimiento). Guardar estas agrupaciones para análisis interpretativo y para crear agregados si conviene (scores).
+
+Splits reproducibles:
+
+Crear hold-out test set estratificado (ej. 20% estratificado por Bankrupt?) y usar el 80% restante para entrenamiento/validación (CV). Guardar seed.
+
+
